@@ -10,7 +10,11 @@ model = pickle.load(open('model.pkl', 'rb'))
 def home():
     result =''
     return render_template('index.html', **locals())
-                               
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/favicon.png')                       
 
 @app.route('/predict', methods=['POST', 'GET'])
 def predict():
