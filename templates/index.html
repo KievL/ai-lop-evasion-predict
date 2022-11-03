@@ -1,0 +1,15 @@
+<html>
+    <body>
+        <form action='/predict' method='POST'>
+            Questões com erro total: <input type='text' name='totalErrors'><br>
+            Questões com algum acerto: <input type='text' name='algumAcerto'><br>
+            Questões com 100% acerto: <input type='text' name='questoesCertas'><br>
+            Submissões com 100% de acerto: <input type='text' name='acertos_100'><br>
+            Submissões: <input type='text' name='submissoes'><br>
+            Questões tentadas: <input type='text' name='questoesTentadas'><br>
+            Tempo total para fazer a lista (segundos): <input type='text' name='tempoLista'><br>
+            Desistente: {{result}} <br>
+            <input type='submit' value='Prever'>
+        </form>
+    </body>
+</html>
