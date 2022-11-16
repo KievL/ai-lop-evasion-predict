@@ -1,6 +1,7 @@
 <html>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <body>
-        <form action='/predict' method='POST'>
+        <form id = 'predict' method='POST'>
             Questões com erro total: <input type='text' name='totalErrors'><br>
             Questões com algum acerto: <input type='text' name='algumAcerto'><br>
             Questões com 100% acerto: <input type='text' name='questoesCertas'><br>
@@ -11,5 +12,35 @@
             Desistente: {{result}} <br>
             <input type='submit' value='Prever'>
         </form>
+        <script>
+            $("form#predict").submit(function(event){
+                event.preventDefault();
+                var allElements= event.target.elements;
+                var json = {
+                    "totalErrors":allElements.totalErrors.value,
+                    "algumAcerto":allElements.algumAcerto.value,
+                    "questoesCertas":allElements.questoesCertas.value,
+                    "acertos_100":allElements.acertos_100.value,
+                    "submissoes":allElements.submissoes.value,
+                    "questoesTentadas":allElements.questoesTentadas.value,
+                    "tempoLista":allElements.tempoLista.value
+                }
+
+                var jsonStr = JSON.stringify(json)
+                
+                $.ajax({
+                    url: "https://sleepy-waters-32846.herokuapp.com/predict",
+                    data: JSON.parse(jsonStr),
+                    method: "GET",
+                    success: function(result){
+                        console.log(result)
+                    },
+                    error: function(error){
+                        console.log(error)
+                    }
+                });
+                return false
+            })
+        </script>
     </body>
 </html>
